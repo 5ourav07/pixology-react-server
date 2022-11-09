@@ -29,6 +29,13 @@ async function run() {
             const service = await serviceCollection.findOne(query);
             res.send(service);
         });
+
+        app.post('/services', async (req, res) => {
+            const service = req.body;
+            console.log(service);
+            const result = await serviceCollection.insertOne(service)
+            res.send(result);
+        });
     }
     finally {
 
@@ -38,9 +45,9 @@ async function run() {
 run().catch(err => console.error(err));
 
 app.get('/', (req, res) => {
-    res.send('Server Running')
+    res.send('Server is Running')
 })
 
 app.listen(port, () => {
-    console.log(`Server Running on port: ${port}`);
+    console.log(`Server is Running on port: ${port}`);
 })
