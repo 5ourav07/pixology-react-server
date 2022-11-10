@@ -44,7 +44,7 @@ async function run() {
         app.get('/reverse-services', async (req, res) => {
             const query = {}
             const cursor = serviceCollection.find(query);
-            const services = await cursor.limit(3).toArray();
+            const services = await cursor.limit(3).sort({ _id: -1 }).toArray();
             res.send(services);
         });
 
@@ -102,7 +102,7 @@ async function run() {
             }
 
             const cursor = reviewCollection.find(query);
-            const review = await cursor.toArray();
+            const review = await cursor.sort({ timestamp: -1 }).toArray();
             res.send(review);
         });
 
